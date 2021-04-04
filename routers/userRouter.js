@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const UserController = require('../controller/user.controller');
+const { UserController } = require('../controllers/index');
 const { checkPagination, checkUser } = require('../middlewares/index');
 const userRouter = Router();
 
