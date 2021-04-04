@@ -45,13 +45,11 @@ module.exports.updateUser = async (req, res, next) => {
       params: { id },
       body,
     } = req;
-
     const [rowsCount, [updatedUser]] = await User.update(body, {
       where: { id },
       returning: true,
     });
 
-    // delete updatedUser.password;
     updatedUser.password = undefined;
 
     res.send({ data: updatedUser });
@@ -78,13 +76,10 @@ module.exports.updateUserInstance = async (req, res, next) => {
 
 module.exports.deleteUser = async (req, res, next) => {
   try {
-    const {
-      params: { id },
-    } = req;
-
-    const user = await User.findByPk(id);
-
-    const result = await user.destroy();
+    const { userInstance } = req;
+    const user = userInstance;
+    user.password = undefined;
+    const result = await userInstance.destroy();
     console.log(result);
     res.send({ data: user });
   } catch (err) {
