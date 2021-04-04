@@ -1,4 +1,4 @@
-POST http://localhost:3000/api/user/1/task
+POST http://localhost:3000/api/task/byUserId/1/
 Content-Type: application/json
 
 {

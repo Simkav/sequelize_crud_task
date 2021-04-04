@@ -1,0 +1,7 @@
+PATCH http://localhost:3000/api/task/3
+Content-Type: application/json
+
+{
+  "body":"Abrakadabra",
+  "deadline":"2030-1-1"
+}
