@@ -35,3 +35,21 @@ module.exports.getUserTasks = async (req, res, next) => {
     next(err);
   }
 };
+
+module.exports.updateTask = async (req, res, next) => {
+  try {
+    const {
+      params: { id },
+      body,
+    } = req;
+    console.log(body, id);
+    const [rowsCount, [updatedTask]] = await Task.update(body, {
+      where: { id },
+      returning: true,
+    });
+
+    res.send({ data: updatedTask });
+  } catch (err) {
+    next(err);
+  }
+};
