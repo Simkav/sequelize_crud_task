@@ -26,13 +26,12 @@ module.exports.getTask = async (req, res, next) => {
 
 module.exports.getAllTasks = async (req, res, next) => {
   const { pagiLimit, pagiOffset, withoutPagi } = req;
-  let tasks;
+  const options = req.withoutPagi
+    ? {}
+    : { limit: pagiLimit, offset: pagiOffset };
   try {
-    if (req.withoutPagi) {
-      tasks = await Task.findAll();
-    } else {
-      tasks = await Task.findAll({ limit: pagiLimit, offset: pagiOffset });
-    }
+    const tasks = await Task.findAll(options);
+
     res.status(200).send({ data: tasks });
   } catch (err) {
     console.log(err);
