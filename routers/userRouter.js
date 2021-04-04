@@ -1,7 +1,6 @@
 const { Router } = require('express');
 const UserController = require('../controller/user.controller');
-const { checkUser } = require('../middlewares/user.mw');
-const { checkPagination } = require('../middlewares/pagination.mw');
+const { checkPagination, checkUser } = require('../middlewares/index');
 const userRouter = Router();
 
 userRouter.get('/', checkPagination, UserController.getAllUsers);

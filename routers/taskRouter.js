@@ -1,7 +1,6 @@
 const { Router } = require('express');
 const TaskController = require('../controller/task.controller');
-const { checkUser } = require('../middlewares/user.mw');
-const { checkPagination } = require('../middlewares/pagination.mw');
+const { checkPagination, checkUser } = require('../middlewares/index');
 const taskRouter = Router();
 
 taskRouter.get('/byUserId/:id', checkUser, TaskController.getUserTasks);
