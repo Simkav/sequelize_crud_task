@@ -1,10 +1,11 @@
 const { Router } = require('express');
 const TaskController = require('../controller/task.controller');
 const { checkUser } = require('../middlewares/user.mw');
+const { checkPagination } = require('../middlewares/pagination.mw');
 const router = Router();
 
 router.get('/byUserId/:id', checkUser, TaskController.getUserTasks);
-router.get('/', TaskController.getAllTasks);
+router.get('/', checkPagination, TaskController.getAllTasks);
 router.get('/:id', TaskController.getTask);
 router.post('/byUserId/:id', checkUser, TaskController.createTask);
 
