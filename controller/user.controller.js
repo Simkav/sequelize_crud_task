@@ -26,11 +26,23 @@ module.exports.getUser = async (req, res, next) => {
 
 module.exports.getAllUsers = async (req, res, next) => {
   try {
-    const users = await User.findAll({
-      attributes: {
-        exclude: ['password'],
-      },
-    });
+    const { pagiLimit, pagiOffset, withoutPagi } = req;
+    let users;
+    if (req.withoutPagi) {
+      users = await User.findAll({
+        attributes: {
+          exclude: ['password'],
+        },
+      });
+    } else {
+      users = await User.findAll({
+        limit: pagiLimit,
+        offset: pagiOffset,
+        attributes: {
+          exclude: ['password'],
+        },
+      });
+    }
     res.status(200).send({
       data: users,
     });
