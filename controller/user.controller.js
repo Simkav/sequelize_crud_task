@@ -13,6 +13,17 @@ module.exports.createUser = async (req, res, next) => {
   }
 };
 
+module.exports.getUser = async (req, res, next) => {
+  try {
+    const { userInstance } = req;
+    userInstance.password = undefined;
+    res.status(200).send({ data: userInstance });
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+};
+
 module.exports.getAllUsers = async (req, res, next) => {
   try {
     const users = await User.findAll({
