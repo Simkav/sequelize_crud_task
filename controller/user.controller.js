@@ -64,13 +64,13 @@ module.exports.updateUserInstance = async (req, res, next) => {
   try {
     const { body, userInstance } = req;
 
-    const updateduserInstance = await userInstance.update(body, {
+    const updatedUserInstance = await userInstance.update(body, {
       returning: true,
     });
 
-    updateduserInstance.password = undefined;
+    updatedUserInstance.password = undefined;
 
-    res.send({ data: updateduserInstance });
+    res.send({ data: updatedUserInstance });
   } catch (err) {
     next(err);
   }
