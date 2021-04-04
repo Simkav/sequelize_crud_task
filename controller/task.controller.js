@@ -36,20 +36,19 @@ module.exports.getUserTasks = async (req, res, next) => {
   }
 };
 
-module.exports.updateTask = async (req, res, next) => {
+
+module.exports.deleteTask = async (req, res, next) => {
   try {
     const {
       params: { id },
-      body,
     } = req;
-    console.log(body, id);
-    const [rowsCount, [updatedTask]] = await Task.update(body, {
-      where: { id },
-      returning: true,
-    });
+    const task = await Task.findByPk(id);
 
-    res.send({ data: updatedTask });
-  } catch (err) {
-    next(err);
+    await task.destroy();
+
+    res.status(200).send({ data: task });
+  } catch (error) {
+    console.log(error);
+    next(error);
   }
 };
