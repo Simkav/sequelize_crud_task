@@ -2,15 +2,15 @@ const { Router } = require('express');
 const TaskController = require('../controller/task.controller');
 const { checkUser } = require('../middlewares/user.mw');
 const { checkPagination } = require('../middlewares/pagination.mw');
-const router = Router();
+const taskRouter = Router();
 
-router.get('/byUserId/:id', checkUser, TaskController.getUserTasks);
-router.get('/', checkPagination, TaskController.getAllTasks);
-router.get('/:id', TaskController.getTask);
-router.post('/byUserId/:id', checkUser, TaskController.createTask);
+taskRouter.get('/byUserId/:id', checkUser, TaskController.getUserTasks);
+taskRouter.get('/', checkPagination, TaskController.getAllTasks);
+taskRouter.get('/:id', TaskController.getTask);
+taskRouter.post('/byUserId/:id', checkUser, TaskController.createTask);
 
-router.patch(`/:id`, TaskController.updateTask);
+taskRouter.patch(`/:id`, TaskController.updateTask);
 
-router.delete('/:id', TaskController.deleteTask);
+taskRouter.delete('/:id', TaskController.deleteTask);
 
-module.exports.taskRouter = router;
+module.exports = taskRouter;

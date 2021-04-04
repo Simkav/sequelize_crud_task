@@ -1,11 +1,9 @@
 const express = require('express');
-const { taskRouter, userRouter } = require('./router');
+const { taskRouter, userRouter } = require('./routers/router');
 const app = express();
 
-app.use(express.json()); // data stream -> json -> js object -> req.body
-/* 
-  http://localhost:3000/api/*
- */
+app.use(express.json()); 
+
 app.use('/api/user', userRouter);
 app.use('/api/task', taskRouter);
 
