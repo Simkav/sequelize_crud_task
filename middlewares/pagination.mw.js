@@ -13,7 +13,7 @@ module.exports.checkPagination = async (req, res, next) => {
     } = req;
     if (reqLimit || reqPage) {
       const limit = reqLimit > 0 && reqLimit < MAX_LIMIT ? reqLimit : MAX_LIMIT;
-      const offset = calculateOffset(reqLimit, Number(reqPage));
+      const offset = calculateOffset(limit, Number(reqPage));
       req.pagiLimit = Number(limit);
       req.pagiOffset = offset;
       next();
